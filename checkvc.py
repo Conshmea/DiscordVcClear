@@ -25,7 +25,7 @@ class CheckVc(commands.Cog):
                 self.Vcs[str(before.channel)] = []
                 self.Vcs[str(before.channel)].remove(f"{member.name}#{member.discriminator}")
 
-        #If it is the last user to leave the VC delete and clear the logged messagesfor the VC
+        #If it is the last user to leave the VC delete and clear the logged messages for the VC (Can only clear messages posted after when the bot went online)
         if before.channel != None:
             print(self.bot.VC_messages[before.channel.id])
             if self.Vcs[str(before.channel)] == []:
