@@ -2,22 +2,18 @@ import discord
 from discord.ext import commands
 import checkvc
 
+#stuff
 TOKEN = "[botToken]"
-
 client = discord.Client()
-
-
-
-
-
 bot = commands.Bot("vcc.")
-
 bot.VC_messages = {}
 
+#Bot connected readout
 @bot.event
 async def on_ready():
     print(f'\n\nLogged in as: {bot.user.name} - {bot.user.id}\nVersion: {discord.__version__}\n')
 
+#Checks if a message was posted in a VC and log it
 @bot.event
 async def on_message(message):
     if str(message.channel.type) == "voice":
@@ -27,14 +23,9 @@ async def on_message(message):
             bot.VC_messages[message.channel.id] = []
             bot.VC_messages[message.channel.id].append(message)
 
-#@bot.command()
-#async def channel(ctx):
-#    await ctx.send(f"{ctx.author.mention}, {ctx.channel}")
-#    await ctx.message.delete()
-
-bot.hi = "Starting"
-
+#Add the Cog to monitor VCs
 bot.add_cog(checkvc.CheckVc(bot))
 
+#Run the bot
 bot.run(TOKEN, bot=True, reconnect=True)
 
